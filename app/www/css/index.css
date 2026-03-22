@@ -1,3 +1,16 @@
+#link-container {
+    display: flex;
+    width: 100%;
+}
+
+#link-container a {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    color: #4af;
+    text-decoration: none;
+}
+
 * {
     margin: 0;
     padding: 0;

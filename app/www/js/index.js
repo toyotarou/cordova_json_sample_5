@@ -18,6 +18,31 @@ async function onDeviceReady() {
             leafletMap.fitBounds(savedBounds, { padding: [50, 50] });
         }
     });
+
+    // Station ダイアログ
+    const overlay = document.getElementById('station-dialog-overlay');
+    const iframe = document.getElementById('station-iframe');
+
+    let stationSubDialogOpen = false;
+    window.setStationSubDialogOpen = function(val) {
+        stationSubDialogOpen = val;
+    };
+
+    document.getElementById('station-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        iframe.src = 'tokyoTrainStation.html';
+        overlay.style.display = 'flex';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target !== overlay) return;
+        if (stationSubDialogOpen) {
+            iframe.contentWindow.closeStationAroundDialog();
+        } else {
+            overlay.style.display = 'none';
+            iframe.src = '';
+        }
+    });
 }
 
 function showTable() {

@@ -68,10 +68,10 @@ function applyHitCache(hitCache) {
             btn.className = 'station-btn';
             btn.textContent = count;
             btn.onclick = function() {
-                location.href = 'stationAround.html'
+                openStationAroundDialog('stationAround.html'
                     + '?lat=' + cell.dataset.lat
                     + '&lng=' + cell.dataset.lng
-                    + '&name=' + encodeURIComponent(cell.dataset.name);
+                    + '&name=' + encodeURIComponent(cell.dataset.name));
             };
             linkCell.appendChild(btn);
         }
@@ -112,10 +112,10 @@ function fillHitCounts(geolocs) {
                 btn.textContent = count;
                 (function(c) {
                     btn.onclick = function() {
-                        location.href = 'stationAround.html'
+                        openStationAroundDialog('stationAround.html'
                             + '?lat=' + c.dataset.lat
                             + '&lng=' + c.dataset.lng
-                            + '&name=' + encodeURIComponent(c.dataset.name);
+                            + '&name=' + encodeURIComponent(c.dataset.name));
                     };
                 })(cell);
                 linkCell.appendChild(btn);
@@ -132,6 +132,32 @@ function fillHitCounts(geolocs) {
 
     setTimeout(processBatch, 0);
 }
+
+// StationAround ダイアログ
+var aroundOverlay = document.getElementById('around-dialog-overlay');
+var aroundIframe = document.getElementById('around-iframe');
+
+function openStationAroundDialog(url) {
+    aroundIframe.src = url;
+    aroundOverlay.style.display = 'flex';
+    if (window.parent && window.parent.setStationSubDialogOpen) {
+        window.parent.setStationSubDialogOpen(true);
+    }
+}
+
+window.closeStationAroundDialog = function() {
+    aroundOverlay.style.display = 'none';
+    aroundIframe.src = '';
+    if (window.parent && window.parent.setStationSubDialogOpen) {
+        window.parent.setStationSubDialogOpen(false);
+    }
+};
+
+aroundOverlay.addEventListener('click', function(e) {
+    if (e.target === aroundOverlay) {
+        window.closeStationAroundDialog();
+    }
+});
 
 // Geolocは常にfetch
 var geolocPromise = fetch('http://49.212.175.205:3000/api/v1/geoloc')

@@ -1,23 +1,8 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
-let leafletMap = null;
-let savedScrollY = 0;
-let savedBounds = null;
-
 async function onDeviceReady() {
     await callGeoloc();
     prefetchTrainStations();
-
-    document.getElementById('back-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        showTable();
-    });
-
-    document.getElementById('reset-btn').addEventListener('click', () => {
-        if (leafletMap && savedBounds) {
-            leafletMap.fitBounds(savedBounds, { padding: [50, 50] });
-        }
-    });
 
     // ページダイアログの共通セットアップ
     function setupPageDialog(overlayId, iframeId, linkId, src) {
@@ -46,6 +31,7 @@ async function onDeviceReady() {
 
     const stationDialog = setupPageDialog('station-dialog-overlay', 'station-iframe', 'station-link', 'tokyoTrainStation.html');
     const templeDialog  = setupPageDialog('temple-dialog-overlay',  'temple-iframe',  'temple-link',  'templeLatLng.html');
+    setupPageDialog('home-dialog-overlay', 'home-iframe', 'home-link', 'home.html');
 
     window.setSubDialogOpen = function(val) {
         if (document.getElementById('station-dialog-overlay').style.display === 'flex') {
@@ -54,56 +40,17 @@ async function onDeviceReady() {
             templeDialog.setSubDialogOpen(val);
         }
     };
+
+    // Map ダイアログ
+    const mapOverlay = document.getElementById('map-dialog-overlay');
+    const mapIframe  = document.getElementById('map-iframe');
+
+    mapOverlay.addEventListener('click', (e) => {
+        if (e.target !== mapOverlay) return;
+        mapOverlay.style.display = 'none';
+        mapIframe.src = '';
+    });
 }
-
-function showTable() {
-    document.getElementById('screen-map').style.display = 'none';
-    document.getElementById('screen-table').style.display = 'block';
-    window.scrollTo(0, savedScrollY);
-}
-
-function showMap(date, points) {
-    savedScrollY = window.scrollY;
-    document.getElementById('screen-table').style.display = 'none';
-    document.getElementById('screen-map').style.display = 'flex';
-    document.getElementById('map-date-label').textContent = date;
-
-    // 既存マップを破棄
-    if (leafletMap) {
-        leafletMap.remove();
-        leafletMap = null;
-    }
-
-    // DOMレイアウト確定後にLeafletを初期化
-    setTimeout(() => {
-        leafletMap = L.map('map');
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
-        }).addTo(leafletMap);
-
-        const latLngs = [];
-        points.forEach((p) => {
-            const lat = Number(p.latitude);
-            const lng = Number(p.longitude);
-            if (lat && lng) {
-                L.circleMarker([lat, lng], {
-                    radius: 4,
-                    color: 'red',
-                    fillColor: 'red',
-                    fillOpacity: 0.5,
-                    weight: 0,
-                }).addTo(leafletMap);
-                latLngs.push([lat, lng]);
-            }
-        });
-
-        savedBounds = L.latLngBounds(latLngs);
-        leafletMap.invalidateSize();
-        leafletMap.fitBounds(savedBounds, { padding: [50, 50] });
-    }, 200);
-}
-
 
 function getBoundingBoxInfo(points) {
     if (!points || points.length === 0) {
@@ -173,7 +120,12 @@ async function callGeoloc() {
             if (info.areaKm2 >= 0.005) {
                 tr.querySelector('.map-link').addEventListener('click', (e) => {
                     e.preventDefault();
-                    showMap(date, points);
+                    const mapOverlay = document.getElementById('map-dialog-overlay');
+                    const mapIframe  = document.getElementById('map-iframe');
+                    localStorage.setItem('mapDate', date);
+                    localStorage.setItem('mapPoints', JSON.stringify(points));
+                    mapIframe.src = 'map.html';
+                    mapOverlay.style.display = 'flex';
                 });
             }
         });

@@ -10,34 +10,12 @@
     <title>Map</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: system-ui, sans-serif; }
-        #header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px 16px;
-        }
-        #header a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        #header span {
-            font-size: 16px;
-        }
-        #map {
-            width: 100%;
-            height: calc(100vh - 48px);
-        }
+        html, body { width: 100%; height: 100%; background: #000; overflow: hidden; }
+        #map { width: 100%; height: 100%; }
     </style>
 </head>
 <body>
-    <div id="header">
-        <a href="index.html">← 戻る</a>
-        <span id="date-label"></span>
-    </div>
     <div id="map"></div>
-    <script src="cordova.js"></script>
     <script src="js/map.js"></script>
 </body>
 </html>

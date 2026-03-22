@@ -1,10 +1,5 @@
-document.addEventListener('deviceready', initMap, false);
-
 function initMap() {
-    const date = localStorage.getItem('mapDate');
     const points = JSON.parse(localStorage.getItem('mapPoints') || '[]');
-
-    document.getElementById('date-label').textContent = date || '';
 
     if (points.length === 0) return;
 
@@ -21,7 +16,15 @@ function initMap() {
         const lat = Number(p.latitude);
         const lng = Number(p.longitude);
         if (lat && lng) {
-            L.marker([lat, lng]).addTo(map);
+            L.circleMarker([lat, lng], {
+                radius: 4,
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.6,
+                weight: 0
+            }).addTo(map);
         }
     });
 }
+
+initMap();

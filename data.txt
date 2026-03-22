@@ -1,0 +1,66 @@
+
+
+http://49.212.175.205:3000/api/v1/geoloc
+
+
+
+[
+    {
+        "id": 1,
+        "year": "2023",
+        "month": "04",
+        "day": "13",
+        "time": "00:00:00",
+        "latitude": "35.7102211",
+        "longitude": "139.9489341\r"
+    },
+    {
+        "id": 2,
+        "year": "2023",
+        "month": "04",
+        "day": "13",
+        "time": "00:55:27",
+        "latitude": "35.7102547",
+        "longitude": "139.948922\r"
+    },
+
+
+
+
+
+
+
+
+http://toyohide.work/BrainLog/api/getTokyoTrainStation
+
+
+
+
+{
+    "data": [
+        {
+            "train_number": 0,
+            "train_name": "JR中央線",
+            "station": [
+                {
+                    "id": "0-1000005_1",
+                    "station_name": "東京",
+                    "address": "",
+                    "lat": 35.681391,
+                    "lng": 139.766103
+                },
+                {
+                    "id": "0-1010044_1",
+                    "station_name": "神田",
+                    "address": "",
+                    "lat": 35.691173,
+                    "lng": 139.770641
+                },
+
+
+
+
+
+
+
+

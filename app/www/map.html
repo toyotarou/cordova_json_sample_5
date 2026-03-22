@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval' http://49.212.175.205:3000 http://toyohide.work https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com https://unpkg.com; media-src *; img-src * data: content:;">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Map</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: system-ui, sans-serif; }
+        #header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+        }
+        #header a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        #header span {
+            font-size: 16px;
+        }
+        #map {
+            width: 100%;
+            height: calc(100vh - 48px);
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <a href="index.html">← 戻る</a>
+        <span id="date-label"></span>
+    </div>
+    <div id="map"></div>
+    <script src="cordova.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval' http://toyohide.work http://49.212.175.205:3000 https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com https://unpkg.com; img-src * data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Tokyo Train Station</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 40px 16px;
+        }
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .train-block {
+            margin-bottom: 24px;
+        }
+        .train-name {
+            font-size: 15px;
+            font-weight: bold;
+            background: #1a4a9a;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px 4px 0 0;
+        }
+        .station-row {
+            display: flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: #111;
+            border-bottom: 1px solid #333;
+            font-size: 14px;
+        }
+        .station-row:last-child {
+            border-bottom: none;
+            border-radius: 0 0 4px 4px;
+        }
+        .station-name-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .station-name {
+            font-weight: 500;
+            color: #eee;
+        }
+        .station-coords {
+            font-size: 10px;
+            color: #666;
+        }
+        .station-hit {
+            display: none;
+        }
+        .station-link {
+            width: 100px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .station-btn {
+            background: #2e7d32;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            width: 100px;
+            padding: 4px 0;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .station-btn:active {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Tokyo Train Station</h1>
+        <div id="station-list"></div>
+    </div>
+
+    <script src="js/tokyoTrainStation.js"></script>
+</body>
+
+</html>

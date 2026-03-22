@@ -3,7 +3,7 @@ var templeLat = Number(params.get('lat'));
 var templeLng = Number(params.get('lng'));
 var templeName = params.get('name') || '神社';
 
-document.getElementById('temple-label').textContent = templeName;
+document.querySelector('.around-label').textContent = templeName;
 
 var map = L.map('map', { maxZoom: 19 }).setView([templeLat, templeLng], 15);
 

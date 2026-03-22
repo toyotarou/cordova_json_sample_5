@@ -19,30 +19,41 @@ async function onDeviceReady() {
         }
     });
 
-    // Station ダイアログ
-    const overlay = document.getElementById('station-dialog-overlay');
-    const iframe = document.getElementById('station-iframe');
+    // ページダイアログの共通セットアップ
+    function setupPageDialog(overlayId, iframeId, linkId, src) {
+        const overlay = document.getElementById(overlayId);
+        const iframe = document.getElementById(iframeId);
+        let subDialogOpen = false;
 
-    let stationSubDialogOpen = false;
-    window.setStationSubDialogOpen = function(val) {
-        stationSubDialogOpen = val;
-    };
+        document.getElementById(linkId).addEventListener('click', (e) => {
+            e.preventDefault();
+            iframe.src = src;
+            overlay.style.display = 'flex';
+        });
 
-    document.getElementById('station-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        iframe.src = 'tokyoTrainStation.html';
-        overlay.style.display = 'flex';
-    });
+        overlay.addEventListener('click', (e) => {
+            if (e.target !== overlay) return;
+            if (subDialogOpen) {
+                iframe.contentWindow.closeAroundDialog();
+            } else {
+                overlay.style.display = 'none';
+                iframe.src = '';
+            }
+        });
 
-    overlay.addEventListener('click', (e) => {
-        if (e.target !== overlay) return;
-        if (stationSubDialogOpen) {
-            iframe.contentWindow.closeStationAroundDialog();
-        } else {
-            overlay.style.display = 'none';
-            iframe.src = '';
+        return { setSubDialogOpen: (val) => { subDialogOpen = val; } };
+    }
+
+    const stationDialog = setupPageDialog('station-dialog-overlay', 'station-iframe', 'station-link', 'tokyoTrainStation.html');
+    const templeDialog  = setupPageDialog('temple-dialog-overlay',  'temple-iframe',  'temple-link',  'templeLatLng.html');
+
+    window.setSubDialogOpen = function(val) {
+        if (document.getElementById('station-dialog-overlay').style.display === 'flex') {
+            stationDialog.setSubDialogOpen(val);
+        } else if (document.getElementById('temple-dialog-overlay').style.display === 'flex') {
+            templeDialog.setSubDialogOpen(val);
         }
-    });
+    };
 }
 
 function showTable() {

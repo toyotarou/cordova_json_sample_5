@@ -3,7 +3,7 @@ var stationLat = Number(params.get('lat'));
 var stationLng = Number(params.get('lng'));
 var stationName = params.get('name') || '駅';
 
-document.getElementById('station-label').textContent = stationName;
+document.querySelector('.around-label').textContent = stationName;
 
 var map = L.map('map', { maxZoom: 19 }).setView([stationLat, stationLng], 15);
 

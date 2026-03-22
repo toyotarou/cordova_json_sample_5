@@ -84,10 +84,10 @@ fetch('http://toyohide.work/BrainLog/api/getTempleLatLng', {
                         btn.textContent = count;
                         (function(lat, lng, name) {
                             btn.onclick = function() {
-                                location.href = 'templeAround.html'
+                                openAroundDialog('templeAround.html'
                                     + '?lat=' + lat
                                     + '&lng=' + lng
-                                    + '&name=' + encodeURIComponent(name);
+                                    + '&name=' + encodeURIComponent(name));
                             };
                         })(cell.dataset.lat, cell.dataset.lng, cell.dataset.name);
                         cell.appendChild(btn);

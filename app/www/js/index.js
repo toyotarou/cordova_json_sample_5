@@ -41,6 +41,15 @@ async function onDeviceReady() {
         }
     };
 
+    // テーブルスクロールボタン
+    const tableContainer = document.getElementById('table-container');
+    document.getElementById('scroll-bottom-btn').addEventListener('click', () => {
+        tableContainer.scrollTo({ top: tableContainer.scrollHeight, behavior: 'smooth' });
+    });
+    document.getElementById('scroll-top-btn').addEventListener('click', () => {
+        tableContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     // Map ダイアログ
     const mapOverlay = document.getElementById('map-dialog-overlay');
     const mapIframe  = document.getElementById('map-iframe');

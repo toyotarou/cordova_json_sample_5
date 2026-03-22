@@ -1,16 +1,3 @@
-#link-container {
-    display: flex;
-    width: 100%;
-}
-
-#link-container a {
-    flex: 1;
-    text-align: center;
-    padding: 12px 0;
-    color: #4af;
-    text-decoration: none;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -22,15 +9,63 @@ body {
     color: #fff;
     font-family: system-ui, -apple-system, sans-serif;
     height: 100vh;
+}
+
+#screen-table {
     display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#link-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-shrink: 0;
+    padding: 40px 16px 0 16px;
+    gap: 12px;
+}
+
+#link-container .spacer {
+    flex: 1;
+}
+
+#link-container a {
+    text-align: center;
+    padding: 6px 12px;
+    color: #4af;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#scroll-bottom-btn,
+#scroll-top-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    color: #4af;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding-top: 40px;
+    flex-shrink: 0;
+}
+
+#scroll-bottom-btn:active,
+#scroll-top-btn:active {
+    background: #444;
 }
 
 #table-container {
+    flex: 1;
+    overflow-y: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    padding: 8px 0 24px 0;
 }
 
 #geoloc-table {

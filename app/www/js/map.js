@@ -12,6 +12,7 @@ function initMap() {
         attribution: '© OpenStreetMap contributors',
     }).addTo(map);
 
+    const latLngs = [];
     points.forEach((p) => {
         const lat = Number(p.latitude);
         const lng = Number(p.longitude);
@@ -23,8 +24,13 @@ function initMap() {
                 fillOpacity: 0.6,
                 weight: 0
             }).addTo(map);
+            latLngs.push([lat, lng]);
         }
     });
+
+    if (latLngs.length > 0) {
+        map.fitBounds(L.latLngBounds(latLngs), { padding: [40, 40] });
+    }
 }
 
 initMap();

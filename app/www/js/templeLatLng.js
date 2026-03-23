@@ -29,10 +29,6 @@ fetch('http://toyohide.work/BrainLog/api/getTempleLatLng', {
             coords.className = 'temple-coords';
             coords.textContent = item.lat + ', ' + item.lng;
 
-            info.appendChild(name);
-            info.appendChild(address);
-            info.appendChild(coords);
-
             var rank = document.createElement('span');
             rank.className = 'temple-rank rank-' + item.rank;
             rank.textContent = item.rank;
@@ -43,9 +39,17 @@ fetch('http://toyohide.work/BrainLog/api/getTempleLatLng', {
             countCell.dataset.lng = item.lng;
             countCell.dataset.name = item.temple;
 
+            var subRow = document.createElement('div');
+            subRow.className = 'temple-sub-row';
+            subRow.appendChild(rank);
+            subRow.appendChild(countCell);
+
+            info.appendChild(name);
+            info.appendChild(address);
+            info.appendChild(coords);
+            info.appendChild(subRow);
+
             row.appendChild(info);
-            row.appendChild(rank);
-            row.appendChild(countCell);
             list.appendChild(row);
         });
 

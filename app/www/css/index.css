@@ -76,7 +76,11 @@ body {
     border: 1px solid #555;
     padding: 8px 24px;
     text-align: center;
+    font-size: 12px;
 }
+
+#geoloc-table tr.dow-sun td { background: rgba(180, 0, 0, 0.3); color: #fff; }
+#geoloc-table tr.dow-sat td { background: rgba(0, 0, 180, 0.3); color: #fff; }
 
 #geoloc-table th {
     background-color: #222;
@@ -154,8 +158,8 @@ body {
 
 #station-dialog {
     position: relative;
-    width: 90vw;
-    height: 90vh;
+    width: 85vw;
+    height: 85vh;
     background: #000;
     border-radius: 8px;
     overflow: hidden;
@@ -182,8 +186,8 @@ body {
 
 #temple-dialog {
     position: relative;
-    width: 90vw;
-    height: 90vh;
+    width: 85vw;
+    height: 85vh;
     background: #000;
     border-radius: 8px;
     overflow: hidden;
@@ -209,8 +213,8 @@ body {
 }
 
 #home-dialog {
-    width: 90vw;
-    height: 90vh;
+    width: 85vw;
+    height: 85vh;
     background: #000;
     border-radius: 8px;
     overflow: hidden;
@@ -236,8 +240,8 @@ body {
 }
 
 #map-dialog {
-    width: 90vw;
-    height: 90vh;
+    width: 85vw;
+    height: 85vh;
     background: #000;
     border-radius: 8px;
     overflow: hidden;

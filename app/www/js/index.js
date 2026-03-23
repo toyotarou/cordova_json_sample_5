@@ -116,14 +116,20 @@ async function callGeoloc() {
         });
 
         const tbody = document.getElementById('geoloc-tbody');
+        const dowNames = ['日', '月', '火', '水', '木', '金', '土'];
         Object.keys(geolocMap).forEach((date) => {
             const points = geolocMap[date];
             const info = getBoundingBoxInfo(points);
             const linkCell = info.areaKm2 >= 0.005
                 ? `<td><a href="#" class="map-link">link</a></td>`
                 : `<td></td>`;
+            const [y, m, d] = date.split('/').map(Number);
+            const dow = new Date(y, m - 1, d).getDay();
+            const dowStr = dowNames[dow];
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${date}</td><td>${points.length}</td><td>${info.areaKm2.toFixed(2)}</td>${linkCell}`;
+            if (dow === 0) tr.className = 'dow-sun';
+            else if (dow === 6) tr.className = 'dow-sat';
+            tr.innerHTML = `<td>${date}<br><small>${dowStr}</small></td><td>${points.length}</td><td>${info.areaKm2.toFixed(2)}</td>${linkCell}`;
             tbody.appendChild(tr);
 
             if (info.areaKm2 >= 0.005) {
